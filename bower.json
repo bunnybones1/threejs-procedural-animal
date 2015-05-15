@@ -1,0 +1,7 @@
+{
+  "name": "threejs-procedural-animal",
+  "version": "0.0.1",
+  "devDependencies": {
+    "three.js": "*"
+  }
+}

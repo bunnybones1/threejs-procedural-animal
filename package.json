@@ -1,0 +1,37 @@
+{
+  "name": "threejs-procedural-animal",
+  "version": "1.0.0",
+  "description": "An experiment in procedural animal generation using threejs.",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Tomasz Dysinski",
+    "email": "oz@bunnybones.com",
+    "url": "https://github.com/bunnybones1"
+  },
+  "dependencies": {
+    "lodash": "^2.4.1",
+    "simplex-noise": "^2.1.1"
+  },
+  "devDependencies": {
+    "input-resize": "^2.0.0",
+    "loadandrunscripts": "^1.0.0",
+    "threejs-managed-view": "^1.1.0"
+  },
+  "scripts": {
+    "test": "beefy test.js --live --open"
+  },
+  "keywords": [
+    "threejs",
+    "animal",
+    "procedural"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bunnybones1/threejs-procedural-animal.git"
+  },
+  "homepage": "https://github.com/bunnybones1/threejs-procedural-animal",
+  "bugs": {
+    "url": "https://github.com/bunnybones1/threejs-procedural-animal/issues"
+  }
+}
