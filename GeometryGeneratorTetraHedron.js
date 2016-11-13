@@ -1,7 +1,7 @@
 var Vertex = require('./Vertex');
 var Edge = require('./Edge');
 var Face = require('./Face');
-function GeometryGeneratorTetraHedron(size, densityModel) {
+function GeometryGeneratorTetraHedron(size) {
 	size = size || 1;
 	this.vertices = [];
 	this.edges = [];
@@ -111,9 +111,14 @@ GeometryGeneratorTetraHedron.prototype = {
 		var faces = edge.faces;
 		var newParts = edge.split();
 		this.vertices.push(newParts.vertex);
+		var normal = edge.getNormal();
+		normal.multiplyScalar(Math.min(0.2, edge.getLength() * 0.1));
+		newParts.vertex.x += normal.x;
+		newParts.vertex.y += normal.y;
+		newParts.vertex.z += normal.z;
 		this.edges.push(newParts.edges[0]);
 		this.edges.push(newParts.edges[1]);
-		getNewEdgeConnectedTo = function(sharedEdge) {
+		function getNewEdgeConnectedTo(sharedEdge) {
 			if(sharedEdge.isConnectedTo(newParts.edges[0])) return newParts.edges[0];
 			if(sharedEdge.isConnectedTo(newParts.edges[1])) return newParts.edges[1];
 		}

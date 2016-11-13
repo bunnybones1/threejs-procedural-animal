@@ -57,6 +57,15 @@ Edge.prototype = {
 		vec.multiplyScalar((length / oldLength));
 		this.v1.copy(center).sub(vec);
 		this.v2.copy(center).add(vec);
+	},
+	getNormal: function() {
+		var normal = new THREE.Vector3();
+		for (var i = 0; i < this.faces.length; i++) {
+			normal.add(this.faces[i].getNormal());
+		}
+		normal.multiplyScalar(1 / this.faces.length);
+		normal.normalize();
+		return normal;
 	}
 }
 

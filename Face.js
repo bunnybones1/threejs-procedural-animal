@@ -10,8 +10,11 @@ function Face(edge1, edge2, edge3, flip) {
 	idCounter++;
 }
 
+var normal = new THREE.Vector3();
+var tempVec3 = new THREE.Vector3();
+
 Face.prototype = {
-	getFace: function(vertices) {
+	getFace: function() {
 		var verts = [
 			this.edges[0].getSharedVertex(this.edges[1]),
 			this.edges[1].getSharedVertex(this.edges[2]),
@@ -34,8 +37,16 @@ Face.prototype = {
 			edge.removeFace(_this);
 		})
 	},
-	computeNormal: function() {
-		
+	getNormal: function() {
+		var face = this.getFace();
+
+		normal.subVectors( face.c, face.b );
+		tempVec3.subVectors( face.a, face.b );
+		normal.cross( tempVec3 );
+
+		normal.normalize();
+
+		return normal;
 	}
 }
 module.exports = Face;

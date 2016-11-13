@@ -1,19 +1,14 @@
 var ensureLoop = require('./animation-ensure-loop');
 var AnimalGeometry = require('./AnimalGeometry');
-function Animal(callback) {
+function Animal(bones) {
 	this.sway = Math.random() * .2 + .7;
 	this.speed = Math.random() * .001 + .001;
 
-	var totalSegments = 4;
 	var totalLength = 10;
-	var segmentLength = totalLength / totalSegments;
 	var thickness = .3 + Math.random();
 	var subdivisions = 3;
 	var geom = new AnimalGeometry(thickness, totalLength, thickness, subdivisions, totalLength*subdivisions, subdivisions);
-	geom.bones = [{"parent":-1,"name":"BoneRoot","pos":[0,-.5 * totalLength,0],"rotq":[0,0,0,1]}];
-	for (var i = 1; i <= totalSegments; i++) {
-		geom.bones.push({"parent":i-1,"name":"Bone"+i+1,"pos":[0,segmentLength,0],"rotq":[0,0,0,1]});
-	};
+	geom.bones = bones;
 
 	var skinWeights = geom.skinWeights = [];
 	var skinIndices = geom.skinIndices = [];
@@ -24,7 +19,7 @@ function Animal(callback) {
 	};
 	var mat = new THREE.MeshPhongMaterial({
 		color: 0xffffff,
-		shininess: 400,
+		shininess: 50,
 		// shading: THREE.FlatShading,
 		// wireframe: true,
 		// side: THREE.DoubleSide,
@@ -32,7 +27,6 @@ function Animal(callback) {
 	});
 	THREE.SkinnedMesh.call(this, geom, mat);
 	this.update = this.update.bind(this);
-	callback(this);
 
 	this.envelopes = [];
 	for (var i = 0; i < this.skeleton.bones.length; i++) {
