@@ -6,7 +6,7 @@ function Vertex(x, y, z) {
 Vertex.prototype = Object.create(THREE.Vector3.prototype);
 
 Vertex.prototype.addEdge = function(edge) {
-	this.edges.push[edge];
+	this.edges.push(edge);
 }
 
 Vertex.prototype.removeEdge = function(edge) {
@@ -17,5 +17,11 @@ Vertex.prototype.removeEdge = function(edge) {
 
 Vertex.prototype.clone = function() {
 	return new Vertex( this.x, this.y, this.z );
+}
+
+Vertex.prototype.destroy = function() {
+	this.edges.forEach(function(edge) {
+		edge.disconnect();
+	});
 }
 module.exports = Vertex;
